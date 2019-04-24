@@ -9,6 +9,7 @@ public class Application {
 	public static void main(String[] args) {
 		
 		YahtzeeSpel ys = new YahtzeeSpel();
+		System.out.println("[1  2  3  4  5]");
 		System.out.println(YahtzeeSpel.Dobbelstenen);
 		ys.spelen();
 	}
@@ -17,6 +18,7 @@ public class Application {
 class YahtzeeSpel{
 	
 	static List<Integer> Dobbelstenen = new ArrayList<>();
+	static int[] blokkeren = new int[5];
 	
 	YahtzeeSpel(){
 		int dobbelsteenEen = 0;
@@ -47,7 +49,6 @@ class YahtzeeSpel{
 					break;
 				}
 				case "d":{
-//					werpen(); // hier moet de waarde aan 5 willekeurige dobbelstenen worden toegevoegd na 'enter'(??)
 					int index = 0;
 					for (int element : YahtzeeSpel.Dobbelstenen) {
 						element = Dobbelsteen.werpen();
@@ -55,7 +56,16 @@ class YahtzeeSpel{
 						index++;
 						
 					}
+					System.out.println("[1  2  3  4  5]");
 					System.out.println(YahtzeeSpel.Dobbelstenen);
+					break;
+				}
+				case "1":
+				case "2":
+				case "3":
+				case "4":
+				case "5":{
+					vasthouden();
 					break;
 				}
 				default:{
@@ -66,8 +76,38 @@ class YahtzeeSpel{
 	}
 	
 	void vasthouden() {
-		
-		
+		String invoer = sc.nextLine();
+		System.out.println("Type de nummers van de getallen die je vast wilt houden. 1 t/m 5.");
+		switch (invoer) {
+			case "1":{
+				//Boel vasthouden op index 0.
+				System.out.println("Je wil cijfer 1 vasthouden.");
+				break;
+			}
+			case "2":{
+				//Boel vasthouden op index 1.
+				System.out.println("Je wil cijfer 2 vasthouden.");
+				break;
+			}
+			case "3":{
+				//Boel vasthouden op index 2.
+				System.out.println("Je wil cijfer 3 vasthouden.");
+				break;
+			}
+			case "4":{
+				//Boel vasthouden op index 3.
+				System.out.println("Je wil cijfer 4 vasthouden.");
+				break;
+			}
+			case "5":{
+				//Boel vasthouden op index 4.
+				System.out.println("Je wil cijfer 5 vasthouden.");
+				break;
+			}
+			default:{
+				System.out.println("Er gaat iets fout. Voer een andere waarde in.");
+			}
+		}
 	}
 }
 
@@ -80,3 +120,4 @@ class Dobbelsteen {
 		return dobbelNummer;
 	}
 }
+
