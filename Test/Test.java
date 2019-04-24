@@ -1,11 +1,11 @@
-package Yahtzee;
+package Test;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Application {
+public class Test {
 	public static void main(String[] args) {
 		
 		YahtzeeSpel ys = new YahtzeeSpel();
@@ -19,11 +19,11 @@ class YahtzeeSpel{
 	static List<Integer> Dobbelstenen = new ArrayList<>();
 	
 	YahtzeeSpel(){
-		int dobbelsteenEen = 0;
-		int dobbelsteenTwee = 0;
-		int dobbelsteenDrie = 0;
-		int dobbelsteenVier = 0;
-		int dobbelsteenVijf = 0;
+		Integer dobbelsteenEen = 0;
+		Integer dobbelsteenTwee = 0;
+		Integer dobbelsteenDrie = 0;
+		Integer dobbelsteenVier = 0;
+		Integer dobbelsteenVijf = 0;
 		
 		Dobbelstenen.add(dobbelsteenEen);
 		Dobbelstenen.add(dobbelsteenTwee);
@@ -48,12 +48,11 @@ class YahtzeeSpel{
 				}
 				case "d":{
 //					werpen(); // hier moet de waarde aan 5 willekeurige dobbelstenen worden toegevoegd na 'enter'(??)
-					int index = 0;
-					for (int element : YahtzeeSpel.Dobbelstenen) {
-						element = Dobbelsteen.werpen();
-						YahtzeeSpel.Dobbelstenen.set(index, element);
-						index++;
-						
+					for (Integer index : YahtzeeSpel.Dobbelstenen) {
+						System.out.println(index);
+						YahtzeeSpel.Dobbelstenen.set(index, Dobbelsteen.werpen());
+						System.out.println(index);
+						break;
 					}
 					System.out.println(YahtzeeSpel.Dobbelstenen);
 					break;
@@ -64,11 +63,6 @@ class YahtzeeSpel{
 			}
 		}
 	}
-	
-	void vasthouden() {
-		
-		
-	}
 }
 
 class Dobbelsteen {
@@ -76,7 +70,9 @@ class Dobbelsteen {
 	static int werpen() {
 		Random dobbelen = new Random();
 		int dobbelNummer = dobbelen.nextInt(6) +1;
-//		System.out.println(dobbelNummer);
+		System.out.println(dobbelNummer);
 		return dobbelNummer;
 	}
 }
+
+
