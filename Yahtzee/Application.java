@@ -43,11 +43,6 @@ class YahtzeeSpel{
 		while (running) {
 			String invoer = sc.nextLine();
 			
-			if (YahtzeeSpel.Dobbelstenen.stream().mapToInt(value -> value).sum() != 0){
-				vasthouden();
-				break;
-			}
-			
 			switch (invoer) {
 				case "q":{
 					System.out.println("Je bent gestopt.");
@@ -61,13 +56,15 @@ class YahtzeeSpel{
 						if (blokkeren[index] == 0) {
 						element = Dobbelsteen.werpen();
 						YahtzeeSpel.Dobbelstenen.set(index, element);
-						index++;
 						}
+						index++;
 						
 					}
 					System.out.println("[1  2  3  4  5]");
 					System.out.println(YahtzeeSpel.Dobbelstenen);
+					vasthouden();
 					break;
+					
 				}
 				default:{
 					System.out.println("Er gaat iets fout. Voer een 'd' in om een dobbelsteen te gooien of 'q' om te stoppen.");
@@ -84,9 +81,10 @@ class YahtzeeSpel{
 			String index = invoer.substring(i, i + 1);
 			Integer positie = Integer.parseInt(index) -1;
 			blokkeren[positie] = 1;
+			
 		}
 		System.out.println(Arrays.toString(blokkeren));
-		spelen();
+
 	}
 }
 
