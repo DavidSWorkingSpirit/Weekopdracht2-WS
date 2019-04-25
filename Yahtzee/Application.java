@@ -98,3 +98,20 @@ class Dobbelsteen {
 	}
 }
 
+class Worp {
+	static Integer[] worp = new Integer[5];
+	
+	public static void worpOnthouden() {
+		worp = (Integer[]) YahtzeeSpel.Dobbelstenen.toArray();
+		Speler.worpGeschiedenis.add(worp);
+	}
+	
+}
+
+class Speler {
+	public static List<Integer[]> worpGeschiedenis = new ArrayList<>();
+	
+	
+}
+
+
