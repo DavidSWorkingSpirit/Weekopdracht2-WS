@@ -1,6 +1,7 @@
 package Yahtzee;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
@@ -18,7 +19,7 @@ public class Application {
 class YahtzeeSpel{
 	
 	static List<Integer> Dobbelstenen = new ArrayList<>();
-	static int[] blokkeren = new int[5];
+	static int[] blokkeren = new int[] {0, 0, 0, 0, 0};
 	
 	YahtzeeSpel(){
 		int dobbelsteenEen = 0;
@@ -42,6 +43,11 @@ class YahtzeeSpel{
 		while (running) {
 			String invoer = sc.nextLine();
 			
+			if (YahtzeeSpel.Dobbelstenen.stream().mapToInt(value -> value).sum() != 0){
+				vasthouden();
+				break;
+			}
+			
 			switch (invoer) {
 				case "q":{
 					System.out.println("Je bent gestopt.");
@@ -50,22 +56,17 @@ class YahtzeeSpel{
 				}
 				case "d":{
 					int index = 0;
+
 					for (int element : YahtzeeSpel.Dobbelstenen) {
+						if (blokkeren[index] == 0) {
 						element = Dobbelsteen.werpen();
 						YahtzeeSpel.Dobbelstenen.set(index, element);
 						index++;
+						}
 						
 					}
 					System.out.println("[1  2  3  4  5]");
 					System.out.println(YahtzeeSpel.Dobbelstenen);
-					break;
-				}
-				case "1":
-				case "2":
-				case "3":
-				case "4":
-				case "5":{
-					vasthouden();
 					break;
 				}
 				default:{
@@ -76,38 +77,16 @@ class YahtzeeSpel{
 	}
 	
 	void vasthouden() {
-		String invoer = sc.nextLine();
 		System.out.println("Type de nummers van de getallen die je vast wilt houden. 1 t/m 5.");
-		switch (invoer) {
-			case "1":{
-				//Boel vasthouden op index 0.
-				System.out.println("Je wil cijfer 1 vasthouden.");
-				break;
-			}
-			case "2":{
-				//Boel vasthouden op index 1.
-				System.out.println("Je wil cijfer 2 vasthouden.");
-				break;
-			}
-			case "3":{
-				//Boel vasthouden op index 2.
-				System.out.println("Je wil cijfer 3 vasthouden.");
-				break;
-			}
-			case "4":{
-				//Boel vasthouden op index 3.
-				System.out.println("Je wil cijfer 4 vasthouden.");
-				break;
-			}
-			case "5":{
-				//Boel vasthouden op index 4.
-				System.out.println("Je wil cijfer 5 vasthouden.");
-				break;
-			}
-			default:{
-				System.out.println("Er gaat iets fout. Voer een andere waarde in.");
-			}
+		String invoer = sc.nextLine();
+		
+		for (int i = 0; i < invoer.length(); i++) {
+			String index = invoer.substring(i, i + 1);
+			Integer positie = Integer.parseInt(index) -1;
+			blokkeren[positie] = 1;
 		}
+		System.out.println(Arrays.toString(blokkeren));
+		spelen();
 	}
 }
 
