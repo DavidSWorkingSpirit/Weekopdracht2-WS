@@ -15,12 +15,14 @@ public class Application {
 //		System.out.println("[1  2  3  4  5]");
 //		System.out.println(YahtzeeSpel.Dobbelstenen);
 		
+		System.out.println("Welkom bij het spel Yahtzee. Iedere speler mag drie keer gooien. Veel plezier met spelen!");
+		System.out.println("");
 		System.out.println("Speler 1 is aan de beurt om te gooien.");
-		System.out.println("Druk op ENTER om te gooien.");
+		System.out.println("Druk op ENTER om te gooien of op 'q' om te stoppen.");
 		ys.spelen(speler1);
 
 		System.out.println("Speler 2 is aan de beurt om te gooien.");
-		System.out.println("Druk op ENTER om te gooien.");
+		System.out.println("Druk op ENTER om te gooien of op 'q' om te stoppen.");
 		ys.spelen(speler2);
 		
 		System.out.println("Einde van het spel. Bedankt voor het spelen!");
@@ -68,6 +70,7 @@ class YahtzeeSpel{
 				switch (invoer) {
 					case "q":{
 						System.out.println("Je bent gestopt.");
+						speelbeurt = 999;
 						running = false;
 						break;
 					}
@@ -86,21 +89,33 @@ class YahtzeeSpel{
 						System.out.println("Worp " + (speelbeurt + 1));
 						System.out.println("[1  2  3  4  5]");
 						System.out.println(YahtzeeSpel.Dobbelstenen);
+						
+						if (CheckYahtzee.yahtzeeCheck() == true) {
+							System.out.println("YAHTZEE!");
+							System.out.println("");
+							speelbeurt = 999;
+							running = false;
+							break;
+						}
+						
 						vasthouden();
 						Speler.worpGeschiedenis.addAll(Dobbelstenen);
+						
 						int a = 0;
 						
 						System.out.println("Je worpgeschiedenis is:");
 						for (int b = 5; b <= Speler.worpGeschiedenis.size(); b += 5) {
+							if (a == 0) {
+								System.out.print("Worp 1: ");
+							}
+							if (a == 5) {
+								System.out.print("Worp 2: ");
+							}
+							if (a == 10) {
+								System.out.print("Worp 3: ");
+							}
 							System.out.println(Speler.worpGeschiedenis.subList(a, b));
 							a += 5;
-						}
-						
-						if (CheckYahtzee.yahtzeeCheck() == true) {
-							System.out.println("YAHTZEE!");
-							speelbeurt = 999;
-							running = false;
-							break;
 						}
 						
 						speelbeurt++;
@@ -108,7 +123,7 @@ class YahtzeeSpel{
 						
 					}
 					default:{
-						System.out.println("Er gaat iets fout. Voer een 'd' in om een dobbelsteen te gooien of 'q' om te stoppen.");
+						System.out.println("Er gaat iets fout. Druk op 'ENTER' om een dobbelsteen te gooien of 'q' om te stoppen.");
 					}
 				}
 			}
